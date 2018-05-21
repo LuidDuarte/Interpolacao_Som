@@ -6,7 +6,8 @@ interpolacao_newton <- function(X,Y){
   j <- 1
   coeficientes <- c()
   
-  while(i >= 1){
+  while(i > 1){
+      cat(".")
     coeficientes <-c(coeficientes, Y[1])
     z <- c()
     k <- 1
@@ -22,23 +23,21 @@ interpolacao_newton <- function(X,Y){
   return(coeficientes)
 }
 
-polinomio <- function(coeficientes, X, x){
+polinomio <- function(C, X, x){
   i <- 1
-  resultado <- 0
-  while( i <= length(X)){
-    j <- 1
-    z <- 1
-    while (j < i){
-      z <- z*(x-X[j])
-      j <- j+1
+  S <- c()
+  M <- c(1)
+  
+  while(i <= length(C)){
+    if(i == 1){
+      S <- c(S,C[i])
     }
-    resultado <- resultado + coeficientes[i]*z
+    else{
+      M <- c(M,M[i-1]*(x - X[i-1]))
+      S <- c(S,S[i-1]+M[i]*C[i])
+    }
     i <- i+1
   }
-  return(resultado)
   
+  return(S[i-1])
 }
-
-
-
-
