@@ -49,20 +49,19 @@ escreve <- function(nome_nota, grau, nome_resultado){
   
   #A interpolação de newton com graus maiores chegará a resultados perto de infinito, e acabará nos levando a resultados incertos. 
   #A partir de testes, verifiquei que seria melhor dividir os vetores de 30 em 30, não gerando os erros de -Inf.
+  #Apesar de não ir à inifito de 30 em 30, fica muito incerto os resultados não chegando nem próximo a um som, diminuindo o grau para 10, 6, 4, percebe-se uma grande melhora.
   n <- 1
   i <- 1
-  frequencia <- 2.2675736961451E-5 #44100Hz
+  frequencia <- 2.2675736961451E-5 #44100Hz, como não é passado tempo para o audacity, ele reconhece essa frequência.
   
-  inicio_vetor <- 0.00001
-  aux <- 1
-  
+  ##É necessário que arredonde para 5 casas decimais para igualar com o txt criado pelo audacity
   novo_X <- seq(0.00001, X[length(X)], 2.2675736961451E-5)
+  aux <- 1
   while(aux <= length(novo_X)){
     novo_X[aux] <- round(novo_X[aux], digits=5)
     aux <- aux+1
   }
   
-  teste <- 1
   write (novo_X, file="D:/3o\ Semestre/Calculo\ Numerico/Trabalho/notas\ piano/arquivos-texto/novo_X.txt", sep="\n")
   novo_Y_total <- c()
   while(n <= 20970){
@@ -77,12 +76,6 @@ escreve <- function(nome_nota, grau, nome_resultado){
       if(novo_X[i] <= X[grau+1]){
         novo_Y <- c(novo_Y, polinomio(coeficientes, X, novo_X[i]))
         i <- i+1
-      }
-      else{
-        if(teste == 1){
-          cat("\nX[1] = ", X[1], "|novo_X = ", novo_X[i], " |X[30]=", X[4])
-        }
-        teste <- teste+1
       }
       a<- a+1
       
