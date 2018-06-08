@@ -46,7 +46,6 @@ geraY_lagrange <- function(nome_nota, grau, nome_resultado){
     aux <- aux+1
   }
   
-  write (novo_X, file="D:/3o\ Semestre/Calculo\ Numerico/Trabalho/notas\ piano/arquivos-texto/novo_X.txt", sep="\n")
   novo_Y_total <- c()
   while(n+grau <= length(matriz$V1)){
     m <- n+grau
