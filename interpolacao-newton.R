@@ -41,7 +41,7 @@ polinomio <- function(C, X, x){
   return(S[i-1])
 }
 
-escreve <- function(nome_nota, grau, nome_resultado){
+geraY_newton <- function(nome_nota, grau, nome_resultado){
   caminho <- "D:/3o\ Semestre/Calculo\ Numerico/Trabalho/notas\ piano/arquivos-texto/"
   matriz <-read.table(file=paste(caminho,nome_nota, sep=""), sep="\t")
   X <- matriz$V1
@@ -64,7 +64,7 @@ escreve <- function(nome_nota, grau, nome_resultado){
   
   write (novo_X, file="D:/3o\ Semestre/Calculo\ Numerico/Trabalho/notas\ piano/arquivos-texto/novo_X.txt", sep="\n")
   novo_Y_total <- c()
-  while(n <= 20970){
+  while(n+grau <=  length(matriz$V1)){
     m <- n+grau
     X <- matriz$V1[n:m]
     Y <- matriz$V2[n:m]
@@ -88,12 +88,3 @@ escreve <- function(nome_nota, grau, nome_resultado){
   write(novo_Y_total, file=paste(caminhoResultado,nome_resultado, sep=""), sep="\n")
   
 }
-
-#main
-escreve("a1s.txt", 4,"a1s_grau_4.txt")
-
-
-
-
-
-
